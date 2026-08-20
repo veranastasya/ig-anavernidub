@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" data-palette="#2a78d6,#eb6834,#1baf7a">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instagram performance — @anastasia.vernidub</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --surface-1: #fcfcfb;
+    --plane: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --muted: #898781;
+    --grid: #e1e0d9;
+    --baseline: #c3c2b7;
+    --border: rgba(11,11,11,0.10);
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --series-3: #1baf7a;
+    --good: #006300;
+    --critical: #d03b3b;
+    --track: rgba(11,11,11,0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      --surface-1: #1a1a19;
+      --plane: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --muted: #898781;
+      --grid: #2c2c2a;
+      --baseline: #383835;
+      --border: rgba(255,255,255,0.10);
+      --series-1: #3987e5;
+      --series-2: #d95926;
+      --series-3: #199e70;
+      --good: #0ca30c;
+      --critical: #d03b3b;
+      --track: rgba(255,255,255,0.07);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
+  header { margin-bottom: 32px; }
+  h1 { font-size: 24px; font-weight: 650; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .sub { color: var(--text-secondary); font-size: 14px; margin: 0; }
+  .sub b { color: var(--text-primary); font-weight: 600; }
+  h2 {
+    font-size: 12px; font-weight: 650; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--muted); margin: 0 0 14px;
+  }
+  section { margin-bottom: 36px; }
+  .card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+  }
+  /* ---- KPI tiles ---- */
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); gap: 12px; }
+  .kpi { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+  .kpi .label { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+  .kpi .value { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+  .kpi .delta { font-size: 12px; margin-top: 6px; color: var(--text-secondary); }
+  .up { color: var(--good); font-weight: 600; }
+  .down { color: var(--critical); font-weight: 600; }
+  .flat { color: var(--muted); font-weight: 600; }
+  /* ---- bar rows ---- */
+  .rows { display: flex; flex-direction: column; gap: 14px; }
+  .row { display: grid; grid-template-columns: 132px 1fr 68px; align-items: center; gap: 14px; }
+  .row .name { font-size: 13px; color: var(--text-secondary); }
+  .row .val { font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; color: var(--text-primary); font-weight: 600; }
+  .track { height: 14px; background: var(--track); border-radius: 4px; overflow: hidden; display: flex; }
+  .track .seg { height: 100%; border-radius: 4px; }
+  .track .seg + .seg { margin-left: 2px; }
+  /* ---- legend ---- */
+  .legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--grid); }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text-secondary); }
+  .dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  /* ---- creative list ---- */
+  .creatives { display: flex; flex-direction: column; gap: 12px; }
+  .creative { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+  .ctop { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 4px; }
+  .ctitle { font-size: 15px; font-weight: 600; letter-spacing: -0.005em; }
+  .ctitle a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--border); }
+  .ctitle a:hover { border-bottom-color: var(--text-secondary); }
+  .cmeta { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase;
+         padding: 2px 7px; border-radius: 5px; border: 1px solid var(--border); color: var(--text-secondary); margin-right: 8px; }
+  .cstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 10px; margin: 14px 0 12px; }
+  .cstat .k { font-size: 11px; color: var(--muted); }
+  .cstat .v { font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .cnote { font-size: 13px; color: var(--text-secondary); margin: 0; }
+  /* ---- table ---- */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: right; font-weight: 600; color: var(--muted); font-size: 11px; text-transform: uppercase;
+       letter-spacing: 0.05em; padding: 0 0 10px; border-bottom: 1px solid var(--grid); }
+  th:first-child, td:first-child { text-align: left; }
+  td { padding: 10px 0; text-align: right; font-variant-numeric: tabular-nums; border-bottom: 1px solid var(--grid); }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { color: var(--text-secondary); }
+  /* ---- readout ---- */
+  .hero { border-left: 3px solid var(--series-2); }
+  .warn { color: var(--series-2); font-weight: 600; }
+  .stale { color: var(--critical); font-weight: 600; }
+  #trend { display: none; }
+  .spark { width: 100%; height: 150px; display: block; }
+  .spark .gridline { stroke: var(--grid); stroke-width: 1; }
+  .spark .axis { stroke: var(--baseline); stroke-width: 1; }
+  .spark .line { fill: none; stroke: var(--series-1); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .spark .pt { fill: var(--series-1); stroke: var(--surface-1); stroke-width: 2; }
+  .spark text { fill: var(--muted); font-size: 11px; font-family: inherit; }
+  .readout p { margin: 0 0 14px; }
+  .readout p:last-child { margin-bottom: 0; }
+  .readout strong { font-weight: 650; }
+  footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--grid); font-size: 12px; color: var(--muted); }
+  @media (max-width: 620px) {
+    .row { grid-template-columns: 96px 1fr 58px; gap: 10px; }
+    .wrap { padding: 28px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Instagram performance — @anastasia.vernidub</h1>
+  <p class="sub">
+    Rolling last 7 days &nbsp;·&nbsp; <b>Aug 14 – Aug 20, 2026</b>
+    &nbsp;·&nbsp; <span id="stamp" data-updated="2026-08-20T16:10:00-04:00">Updated just now</span>
+  </p>
+</header>
+
+<section id="latest">
+  <h2>Latest post</h2>
+  <div class="card hero">
+    <div class="ctop">
+      <div class="ctitle"><span class="tag">Reel</span><a href="https://www.instagram.com/p/DcQpG8bxq-d/" target="_blank" rel="noopener">"America really said: why waste daylight…" — 6am workout</a></div>
+      <div class="cmeta">Published Aug 20 · <span class="warn">4 hours old — still climbing</span></div>
+    </div>
+    <div class="cstats">
+      <div class="cstat"><div class="k">Views</div><div class="v">2,086</div></div>
+      <div class="cstat"><div class="k">Reach</div><div class="v">1,528</div></div>
+      <div class="cstat"><div class="k">Non-followers</div><div class="v">86.4%</div></div>
+      <div class="cstat"><div class="k">Interactions</div><div class="v">48</div></div>
+      <div class="cstat"><div class="k">Eng./reach</div><div class="v">3.1%</div></div>
+      <div class="cstat"><div class="k">Comments</div><div class="v">11</div></div>
+      <div class="cstat"><div class="k">Saves</div><div class="v">0</div></div>
+      <div class="cstat"><div class="k">Follows</div><div class="v">1</div></div>
+    </div>
+    <p class="cnote">Fastest opening of the six — 2,086 views in four hours, 86% of them non-followers. 11 comments this early means the closing question is doing its job. These numbers will move; the comparison worth making is tomorrow's.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Account, last 7 days</h2>
+  <div class="kpis">
+    <div class="kpi">
+      <div class="label">Views</div>
+      <div class="value">20,893</div>
+      <div class="delta"><span class="up">▲ 93%</span> vs 10,842</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Accounts reached</div>
+      <div class="value">4,761</div>
+      <div class="delta">unique viewers</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Interactions</div>
+      <div class="value">788</div>
+      <div class="delta"><span class="up">▲ 141%</span> vs 327</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Accounts engaged</div>
+      <div class="value">248</div>
+      <div class="delta">5.2% of reach</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Profile visits</div>
+      <div class="value">225</div>
+      <div class="delta"><span class="up">▲ 22%</span> vs 185</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Followers</div>
+      <div class="value">2,090</div>
+      <div class="delta">8 follows from this week's posts</div>
+    </div>
+  </div>
+</section>
+
+<section id="trend">
+  <h2>Rolling 7-day views, snapshotted daily</h2>
+  <div class="card">
+    <svg class="spark" id="trendChart" role="img" aria-labelledby="trendDesc"></svg>
+    <p id="trendDesc" class="cnote" style="margin-top:10px"></p>
+    <div class="legend">
+      <span style="color:var(--muted)">Each point is the trailing-7-day total on that date. Instagram exposes no per-day figure, so this is the rolling window sampled once a day — it smooths spikes and shows direction rather than daily peaks. Appears once three daily snapshots exist.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Where the views came from</h2>
+  <div class="card">
+    <div class="rows">
+      <div class="row">
+        <div class="name">Stories</div>
+        <div class="track"><div class="seg" style="width:53.2%; background:var(--series-1)"></div></div>
+        <div class="val">53.2%</div>
+      </div>
+      <div class="row">
+        <div class="name">Reels</div>
+        <div class="track"><div class="seg" style="width:46.7%; background:var(--series-2)"></div></div>
+        <div class="val">46.7%</div>
+      </div>
+      <div class="row">
+        <div class="name">Feed posts</div>
+        <div class="track"><div class="seg" style="width:0.6%; background:var(--series-3)"></div></div>
+        <div class="val">&lt;0.1%</div>
+      </div>
+    </div>
+    <div class="legend">
+      <span>Share of 20,893 total views. Feed posts round to 0.0% because carousels are served almost entirely to existing followers in Home — see the creative breakdown below.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Where the interactions came from</h2>
+  <div class="card">
+    <div class="rows">
+      <div class="row">
+        <div class="name">Stories</div>
+        <div class="track"><div class="seg" style="width:45.9%; background:var(--series-1)"></div></div>
+        <div class="val">45.9%</div>
+      </div>
+      <div class="row">
+        <div class="name">Feed posts</div>
+        <div class="track"><div class="seg" style="width:28.6%; background:var(--series-3)"></div></div>
+        <div class="val">28.6%</div>
+      </div>
+      <div class="row">
+        <div class="name">Reels</div>
+        <div class="track"><div class="seg" style="width:25.5%; background:var(--series-2)"></div></div>
+        <div class="val">25.5%</div>
+      </div>
+    </div>
+    <div class="legend">
+      <span>Share of 788 total interactions. Feed posts pull 28.6% of engagement off 0.0% of views — the inverse of Reels.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Follower vs non-follower views, per creative</h2>
+  <div class="card">
+    <div class="rows">
+      <div class="row">
+        <div class="name">Reel · NY, but</div>
+        <div class="track">
+          <div class="seg" style="width:14.3%; background:var(--series-1)"></div>
+          <div class="seg" style="width:85.7%; background:var(--series-2)"></div>
+        </div>
+        <div class="val">5,138</div>
+      </div>
+      <div class="row">
+        <div class="name">Reel · NYC b-roll</div>
+        <div class="track">
+          <div class="seg" style="width:22.2%; background:var(--series-1)"></div>
+          <div class="seg" style="width:77.8%; background:var(--series-2)"></div>
+        </div>
+        <div class="val">2,567</div>
+      </div>
+      <div class="row">
+        <div class="name">Reel · 6am workout</div>
+        <div class="track">
+          <div class="seg" style="width:13.6%; background:var(--series-1)"></div>
+          <div class="seg" style="width:86.4%; background:var(--series-2)"></div>
+        </div>
+        <div class="val">2,086</div>
+      </div>
+      <div class="row">
+        <div class="name">Carousel · DMV gyms</div>
+        <div class="track">
+          <div class="seg" style="width:63.3%; background:var(--series-1)"></div>
+          <div class="seg" style="width:36.7%; background:var(--series-2)"></div>
+        </div>
+        <div class="val">1,866</div>
+      </div>
+      <div class="row">
+        <div class="name">Carousel · Carrie B.</div>
+        <div class="track">
+          <div class="seg" style="width:94.9%; background:var(--series-1)"></div>
+          <div class="seg" style="width:5.1%; background:var(--series-2)"></div>
+        </div>
+        <div class="val">1,301</div>
+      </div>
+      <div class="row">
+        <div class="name">Carousel · NYC day</div>
+        <div class="track">
+          <div class="seg" style="width:96.2%; background:var(--series-1)"></div>
+          <div class="seg" style="width:3.8%; background:var(--series-2)"></div>
+        </div>
+        <div class="val">1,135</div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--series-1)"></i> Followers</span>
+      <span><i class="dot" style="background:var(--series-2)"></i> Non-followers</span>
+      <span style="color:var(--muted)">Number at right is total views for the post since publishing.</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>The 6 creatives you published this week</h2>
+  <div class="creatives">
+
+    <div class="creative">
+      <div class="ctop">
+        <div class="ctitle"><span class="tag">Reel</span><a href="https://www.instagram.com/p/DcM0MjqBnQ7/" target="_blank" rel="noopener">"I LOVE New York, BUT" — 5 reasons I wouldn't live in Manhattan</a></div>
+        <div class="cmeta">Aug 18 · 2 days old</div>
+      </div>
+      <div class="cstats">
+        <div class="cstat"><div class="k">Views</div><div class="v">5,138</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">2,615</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">102</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">3.9%</div></div>
+        <div class="cstat"><div class="k">Comments</div><div class="v">15</div></div>
+        <div class="cstat"><div class="k">Shares</div><div class="v">5</div></div>
+        <div class="cstat"><div class="k">Saves</div><div class="v">3</div></div>
+        <div class="cstat"><div class="k">Follows</div><div class="v">1</div></div>
+      </div>
+      <p class="cnote">Your reach engine this week: 86% of views were non-followers and it carried 5 shares — the highest of any post. A numbered opinion list with a "fight me" prompt at the end is the format doing the work, not the location.</p>
+    </div>
+
+    <div class="creative">
+      <div class="ctop">
+        <div class="ctitle"><span class="tag">Reel</span><a href="https://www.instagram.com/p/DcBl_aaxgXp/" target="_blank" rel="noopener">"always a pleasure #NYC" — b-roll</a></div>
+        <div class="cmeta">Aug 14 · 6 days old</div>
+      </div>
+      <div class="cstats">
+        <div class="cstat"><div class="k">Views</div><div class="v">2,567</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">1,541</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">77</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">5.0%</div></div>
+        <div class="cstat"><div class="k">Comments</div><div class="v">3</div></div>
+        <div class="cstat"><div class="k">Shares</div><div class="v">3</div></div>
+        <div class="cstat"><div class="k">Saves</div><div class="v">3</div></div>
+        <div class="cstat"><div class="k">Follows</div><div class="v">1</div></div>
+      </div>
+      <p class="cnote">Travels well (78% non-followers) but converts nothing: 3 comments on 1,541 people reached. A three-word caption gives no one a reason to reply.</p>
+    </div>
+
+    <div class="creative">
+      <div class="ctop">
+        <div class="ctitle"><span class="tag">Reel</span><a href="https://www.instagram.com/p/DcQpG8bxq-d/" target="_blank" rel="noopener">"America really said: why waste daylight…" — 6am workout</a></div>
+        <div class="cmeta">Aug 20 · 4 hours old</div>
+      </div>
+      <div class="cstats">
+        <div class="cstat"><div class="k">Views</div><div class="v">2,086</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">1,528</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">48</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">3.1%</div></div>
+        <div class="cstat"><div class="k">Comments</div><div class="v">11</div></div>
+        <div class="cstat"><div class="k">Shares</div><div class="v">0</div></div>
+        <div class="cstat"><div class="k">Saves</div><div class="v">0</div></div>
+        <div class="cstat"><div class="k">Follows</div><div class="v">1</div></div>
+      </div>
+      <p class="cnote">Still climbing — 2,086 views in four hours is the fastest start of the six, and 86% non-followers. 11 comments this early means the closing question is working. Numbers here will keep moving; treat next week's read as the real one.</p>
+    </div>
+
+    <div class="creative">
+      <div class="ctop">
+        <div class="ctitle"><span class="tag">Carousel</span><a href="https://www.instagram.com/p/DcBN-C_ERCc/" target="_blank" rel="noopener">"Where I'd workout in the DMV area" — studio roundup</a></div>
+        <div class="cmeta">Aug 14 · 6 days old</div>
+      </div>
+      <div class="cstats">
+        <div class="cstat"><div class="k">Views</div><div class="v">1,866</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">831</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">66</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">7.9%</div></div>
+        <div class="cstat"><div class="k">Comments</div><div class="v">13</div></div>
+        <div class="cstat"><div class="k">Profile visits</div><div class="v">31</div></div>
+        <div class="cstat"><div class="k">Saves</div><div class="v">4</div></div>
+        <div class="cstat"><div class="k">Follows</div><div class="v">5</div></div>
+      </div>
+      <p class="cnote">The best post of the week and it isn't close. 5 follows and 31 profile visits — more than the other five creatives combined — plus the only meaningful save count. It's also the only carousel that escaped the follower base (37% non-followers). The difference: it's <strong>useful</strong>. Someone can act on it.</p>
+    </div>
+
+    <div class="creative">
+      <div class="ctop">
+        <div class="ctitle"><span class="tag">Carousel</span><a href="https://www.instagram.com/p/DcGWkCakXnY/" target="_blank" rel="noopener">"has anyone seen Carrie Bradshaw?" — NYC outfit</a></div>
+        <div class="cmeta">Aug 16 · 4 days old</div>
+      </div>
+      <div class="cstats">
+        <div class="cstat"><div class="k">Views</div><div class="v">1,301</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">402</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">87</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">21.6%</div></div>
+        <div class="cstat"><div class="k">Comments</div><div class="v">7</div></div>
+        <div class="cstat"><div class="k">Profile visits</div><div class="v">5</div></div>
+        <div class="cstat"><div class="k">Saves</div><div class="v">0</div></div>
+        <div class="cstat"><div class="k">Follows</div><div class="v">0</div></div>
+      </div>
+      <p class="cnote">Highest engagement rate of the week (21.6%) and the most likes (80) — but off only 402 people, 95% of them existing followers. This is your core audience applauding, not growth. Zero saves, zero follows.</p>
+    </div>
+
+    <div class="creative">
+      <div class="ctop">
+        <div class="ctitle"><span class="tag">Carousel</span><a href="https://www.instagram.com/p/DcI71LOHHS0/" target="_blank" rel="noopener">NYC itinerary — "a perfect day in the city"</a></div>
+        <div class="cmeta">Aug 17 · 3 days old</div>
+      </div>
+      <div class="cstats">
+        <div class="cstat"><div class="k">Views</div><div class="v">1,135</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">350</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">64</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">18.3%</div></div>
+        <div class="cstat"><div class="k">Comments</div><div class="v">8</div></div>
+        <div class="cstat"><div class="k">Profile visits</div><div class="v">3</div></div>
+        <div class="cstat"><div class="k">Saves</div><div class="v">0</div></div>
+        <div class="cstat"><div class="k">Follows</div><div class="v">0</div></div>
+      </div>
+      <p class="cnote">Same shape as the Carrie Bradshaw post — loved by followers, invisible to everyone else (96% followers). Notable miss: an itinerary is the most save-worthy format there is and it got <strong>zero saves</strong>. The slides are photos, not a list someone can come back to.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>All creatives — table view</h2>
+  <div class="card" style="overflow-x:auto">
+    <table>
+      <thead>
+        <tr>
+          <th>Creative</th><th>Type</th><th>Date</th><th>Views</th><th>Reach</th>
+          <th>Non-flwr</th><th>Inter.</th><th>Eng./reach</th><th>Cmt</th><th>Shr</th><th>Sav</th><th>Follows</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>NY, but</td><td>Reel</td><td>Aug 18</td><td>5,138</td><td>2,615</td><td>85.7%</td><td>102</td><td>3.9%</td><td>15</td><td>5</td><td>3</td><td>1</td></tr>
+        <tr><td>NYC b-roll</td><td>Reel</td><td>Aug 14</td><td>2,567</td><td>1,541</td><td>77.8%</td><td>77</td><td>5.0%</td><td>3</td><td>3</td><td>3</td><td>1</td></tr>
+        <tr><td>6am workout</td><td>Reel</td><td>Aug 20</td><td>2,086</td><td>1,528</td><td>86.4%</td><td>48</td><td>3.1%</td><td>11</td><td>0</td><td>0</td><td>1</td></tr>
+        <tr><td>DMV gyms</td><td>Carousel</td><td>Aug 14</td><td>1,866</td><td>831</td><td>36.7%</td><td>66</td><td>7.9%</td><td>13</td><td>2</td><td>4</td><td>5</td></tr>
+        <tr><td>Carrie Bradshaw</td><td>Carousel</td><td>Aug 16</td><td>1,301</td><td>402</td><td>5.1%</td><td>87</td><td>21.6%</td><td>7</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td>NYC day</td><td>Carousel</td><td>Aug 17</td><td>1,135</td><td>350</td><td>3.8%</td><td>64</td><td>18.3%</td><td>8</td><td>1</td><td>0</td><td>0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="readout">
+  <h2>What the numbers say</h2>
+  <div class="card">
+    <p><strong>Two different machines, and you're running both.</strong> Reels reached 78–86% non-followers; carousels reached 4–37%. Reels are how strangers find you. Carousels are how the people who already follow you stay warm. Neither is better — but judging a carousel by views, or a Reel by engagement rate, will make you optimize the wrong thing. The Carrie Bradshaw post has the best engagement rate of the week (21.6%) and produced zero new followers.</p>
+    <p><strong>One post did almost all the acquisition work.</strong> The DMV gym roundup drove 5 of the week's 8 follows and 31 of the profile visits, off the smallest reach of any Reel. It's the only creative that gave someone something to take away. Every other post asked for a reaction; that one answered a question.</p>
+    <p><strong>Saves are near zero across the board.</strong> Four saves on the gym roundup, three each on two Reels, zero on everything else. Saves are the strongest signal that content is worth returning to, and nothing you published this week qualified — including an NYC itinerary, which is the exact format people normally save. The slides are photos rather than a referenceable list.</p>
+    <p><strong>Stories are quietly your largest channel.</strong> 53% of views and 46% of interactions came from Stories, not from anything in the grid. That's the half of your output this dashboard measures least well, and it's the half your existing audience actually sees.</p>
+    <p><strong>Nothing this week pointed at Wellio.</strong> All six creatives are lifestyle and travel. The week was a genuine reach win — views nearly doubled, interactions more than doubled — but it built an audience for New York content, not for a client-management platform for coaches. Worth deciding deliberately whether that's the trade you want, rather than letting the algorithm pick for you: the format that converts (a useful, specific roundup) is the same format that would work for coaching content.</p>
+  </div>
+</section>
+
+<footer>
+  Rebuilt daily from Instagram Insights (Professional dashboard → Account + Content) whenever the browser is available;
+  the stamp at the top says when that last happened, and turns red if a day was missed.
+  Source read on Aug 20, 2026.
+  Prior-week figures for views, interactions and profile visits are derived by subtracting the 7-day window from the 14-day window;
+  reach and accounts-engaged are de-duplicated by Instagram and cannot be differenced this way, so no comparison is shown for them.
+  Per-creative figures are lifetime-to-date for each post, not windowed — the Aug 20 Reel is four hours old and will keep climbing.
+</footer>
+
+<script type="application/json" id="ig-history">
+{
+  "account": "anastasia.vernidub",
+  "updated": "2026-08-20T16:10:00-04:00",
+  "_note": "days[] = one snapshot per daily run, newest first. Each entry holds the trailing-7-day totals as read that day. weeks[] = the Monday summaries. Both are append-only; never overwrite.",
+  "days": [
+    {
+      "date": "2026-08-20",
+      "views": 20893,
+      "viewers": 4761,
+      "interactions": 788,
+      "profileVisits": 225,
+      "followers": 2090,
+      "newCreativeIds": ["3967852068827738013"]
+    }
+  ],
+  "weeks": [
+    {
+      "weekEnding": "2026-08-20",
+      "windowStart": "2026-08-14",
+      "views": 20893,
+      "viewers": 4761,
+      "interactions": 788,
+      "accountsEngaged": 248,
+      "profileVisits": 225,
+      "followers": 2090,
+      "viewMix": { "stories": 53.2, "reels": 46.7, "posts": 0.0 },
+      "interactionMix": { "stories": 45.9, "posts": 28.6, "reels": 25.5 },
+      "feedFollows": 8,
+      "creativeCount": 6,
+      "creatives": [
+        { "id": "3966774933144892475", "shortcode": "DcM0MjqBnQ7", "type": "reel", "date": "2026-08-18", "views": 5138, "reach": 2615, "nonFollowerPct": 85.7, "interactions": 102, "likes": 78, "comments": 15, "saves": 3, "shares": 5, "follows": 1 },
+        { "id": "3963616232477165033", "shortcode": "DcBl_aaxgXp", "type": "reel", "date": "2026-08-14", "views": 2567, "reach": 1541, "nonFollowerPct": 77.8, "interactions": 77, "likes": 68, "comments": 3, "saves": 3, "shares": 3, "follows": 1 },
+        { "id": "3967852068827738013", "shortcode": "DcQpG8bxq-d", "type": "reel", "date": "2026-08-20", "views": 2086, "reach": 1528, "nonFollowerPct": 86.4, "interactions": 48, "likes": 36, "comments": 11, "saves": 0, "shares": 0, "follows": 1 },
+        { "id": "3963510585480515740", "shortcode": "DcBN-C_ERCc", "type": "carousel", "date": "2026-08-14", "views": 1866, "reach": 831, "nonFollowerPct": 36.7, "interactions": 66, "likes": 46, "comments": 13, "saves": 4, "shares": 2, "profileVisits": 31, "follows": 5 },
+        { "id": "3964955755463932376", "shortcode": "DcGWkCakXnY", "type": "carousel", "date": "2026-08-16", "views": 1301, "reach": 402, "nonFollowerPct": 5.1, "interactions": 87, "likes": 80, "comments": 7, "saves": 0, "shares": 0, "profileVisits": 5, "follows": 0 },
+        { "id": "3965682610824049844", "shortcode": "DcI71LOHHS0", "type": "carousel", "date": "2026-08-17", "views": 1135, "reach": 350, "nonFollowerPct": 3.8, "interactions": 64, "likes": 54, "comments": 8, "saves": 0, "shares": 1, "profileVisits": 3, "follows": 0 }
+      ]
+    },
+    {
+      "weekEnding": "2026-08-13",
+      "derived": true,
+      "views": 10842,
+      "interactions": 327,
+      "profileVisits": 185
+    }
+  ]
+}
+</script>
+
+<script>
+(function () {
+  var data = JSON.parse(document.getElementById('ig-history').textContent);
+
+  /* ---- freshness stamp ---------------------------------------------- */
+  var el = document.getElementById('stamp');
+  var when = new Date(el.dataset.updated);
+  var hrs = (Date.now() - when.getTime()) / 3.6e6;
+  var rel;
+  if (hrs < 1)       rel = 'just now';
+  else if (hrs < 24) rel = Math.round(hrs) + 'h ago';
+  else               rel = Math.floor(hrs / 24) + ' day' + (hrs < 48 ? '' : 's') + ' ago';
+  var stamped = when.toLocaleString(undefined, {
+    month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+  });
+  el.textContent = 'Updated ' + rel + ' (' + stamped + ')';
+  /* the run only happens when the browser is open, so staleness is expected
+     sometimes — say so rather than looking silently current */
+  if (hrs > 36) {
+    el.className = 'stale';
+    el.textContent += ' — no run since then';
+  }
+
+  /* ---- rolling-7-day trend ------------------------------------------ */
+  var days = (data.days || []).slice().sort(function (a, b) {
+    return a.date < b.date ? -1 : 1;
+  });
+  if (days.length < 3) return;              /* nothing meaningful to draw yet */
+  days = days.slice(-14);
+
+  var W = 900, H = 150, PL = 52, PR = 12, PT = 12, PB = 26;
+  var vals = days.map(function (d) { return d.views; });
+  var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
+  if (hi === lo) { hi = lo + 1; }
+  var pad = (hi - lo) * 0.15;
+  lo = Math.max(0, lo - pad); hi = hi + pad;
+
+  var x = function (i) { return PL + i * (W - PL - PR) / Math.max(1, days.length - 1); };
+  var y = function (v) { return PT + (1 - (v - lo) / (hi - lo)) * (H - PT - PB); };
+  var fmt = function (v) { return v >= 1000 ? (v / 1000).toFixed(1) + 'K' : String(v); };
+
+  var svg = document.getElementById('trendChart');
+  svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+  svg.setAttribute('preserveAspectRatio', 'none');
+  var p = [];
+
+  [hi, (hi + lo) / 2, lo].forEach(function (v) {
+    p.push('<line class="gridline" x1="' + PL + '" x2="' + (W - PR) +
+           '" y1="' + y(v) + '" y2="' + y(v) + '"/>');
+    p.push('<text x="' + (PL - 8) + '" y="' + (y(v) + 4) +
+           '" text-anchor="end">' + fmt(Math.round(v)) + '</text>');
+  });
+  p.push('<line class="axis" x1="' + PL + '" x2="' + (W - PR) +
+         '" y1="' + y(lo) + '" y2="' + y(lo) + '"/>');
+  p.push('<path class="line" d="' + days.map(function (d, i) {
+    return (i ? 'L' : 'M') + x(i) + ' ' + y(d.views);
+  }).join(' ') + '"/>');
+
+  days.forEach(function (d, i) {
+    p.push('<circle class="pt" cx="' + x(i) + '" cy="' + y(d.views) + '" r="4"><title>' +
+           d.date + ': ' + d.views.toLocaleString() + ' views (trailing 7 days)</title></circle>');
+  });
+  [0, days.length - 1].forEach(function (i) {
+    p.push('<text x="' + x(i) + '" y="' + (H - 6) + '" text-anchor="' +
+           (i ? 'end' : 'start') + '">' + days[i].date.slice(5) + '</text>');
+  });
+
+  svg.innerHTML = p.join('');
+  document.getElementById('trend').style.display = 'block';
+
+  var first = days[0].views, last = days[days.length - 1].views;
+  var pct = first ? Math.round((last - first) / first * 100) : 0;
+  document.getElementById('trendDesc').textContent =
+    'Trailing-7-day views moved from ' + first.toLocaleString() + ' to ' +
+    last.toLocaleString() + ' over ' + days.length + ' snapshots (' +
+    (pct > 0 ? '+' : '') + pct + '%).';
+})();
+</script>
+
+</div>
+</body>
+</html>
