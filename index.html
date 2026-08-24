@@ -111,6 +111,15 @@
   td:first-child { color: var(--text-secondary); }
   /* ---- readout ---- */
   .hero { border-left: 3px solid var(--series-2); }
+  .tag.paid { background: var(--series-3); color: #06251c; }
+  .paidnote { margin-top: 10px; padding: 10px 12px; border-radius: 8px;
+              background: color-mix(in srgb, var(--series-3) 12%, transparent);
+              border: 1px solid color-mix(in srgb, var(--series-3) 35%, transparent);
+              font-size: 13px; line-height: 1.55; }
+  .paidnote b { font-weight: 650; }
+  .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 4px 18px; margin-top: 8px; }
+  .split div { font-size: 12.5px; color: var(--muted); }
+  .split div span { color: var(--text); font-weight: 600; }
   .warn { color: var(--series-2); font-weight: 600; }
   .stale { color: var(--critical); font-weight: 600; }
   #trend { display: none; }
@@ -136,29 +145,54 @@
 <header>
   <h1>Instagram performance — @anastasia.vernidub</h1>
   <p class="sub">
-    Rolling last 7 days &nbsp;·&nbsp; <b>Aug 15 – Aug 21, 2026</b>
-    &nbsp;·&nbsp; <span id="stamp" data-updated="2026-08-21T11:25:00-04:00">Updated just now</span>
+    Rolling last 7 days &nbsp;·&nbsp; <b>Aug 18 – Aug 24, 2026</b>
+    &nbsp;·&nbsp; <span id="stamp" data-updated="2026-08-24T07:45:00-04:00">Updated just now</span>
   </p>
 </header>
 
 <section id="latest">
-  <h2>Latest post</h2>
+  <h2>Latest posts</h2>
   <div class="card hero">
     <div class="ctop">
-      <div class="ctitle"><span class="tag">Reel</span><a href="https://www.instagram.com/p/DcTQMtCxP4W/" target="_blank" rel="noopener">"POV: your two-week trip to America gets renewed for 5 seasons"</a></div>
-      <div class="cmeta">Published Aug 21 · <span class="warn">3 hours old — still climbing</span> · labelled AI content</div>
+      <div class="ctitle"><span class="tag">Carousel</span><span class="tag paid">Boosted</span><a href="https://www.instagram.com/p/DcYb_aCEe_7/" target="_blank" rel="noopener">"kind of chic to walk 20k steps on vacation"</a></div>
+      <div class="cmeta">Published Aug 23 · 23 hours old · paid campaign live, 4 days remaining</div>
     </div>
     <div class="cstats">
-      <div class="cstat"><div class="k">Views</div><div class="v">3,527</div></div>
-      <div class="cstat"><div class="k">Reach</div><div class="v">2,244</div></div>
-      <div class="cstat"><div class="k">Non-followers</div><div class="v">86.1%</div></div>
-      <div class="cstat"><div class="k">Interactions</div><div class="v">66</div></div>
-      <div class="cstat"><div class="k">Eng./reach</div><div class="v">2.9%</div></div>
-      <div class="cstat"><div class="k">Comments</div><div class="v">6</div></div>
-      <div class="cstat"><div class="k">Saves</div><div class="v">1</div></div>
-      <div class="cstat"><div class="k">Follows</div><div class="v">1</div></div>
+      <div class="cstat"><div class="k">Views</div><div class="v">2,098</div></div>
+      <div class="cstat"><div class="k">Reach</div><div class="v">807</div></div>
+      <div class="cstat"><div class="k">Interactions</div><div class="v">62</div></div>
+      <div class="cstat"><div class="k">Eng./reach</div><div class="v">7.7%</div></div>
+      <div class="cstat"><div class="k">Saves</div><div class="v">6</div></div>
+      <div class="cstat"><div class="k">Profile visits</div><div class="v">43</div></div>
+      <div class="cstat"><div class="k">Follows</div><div class="v">13</div></div>
+      <div class="cstat"><div class="k">Spend</div><div class="v">$10.28</div></div>
     </div>
-    <p class="cnote">The fastest opening this account has had: <strong>3,527 views in three hours</strong>, against 2,086 in four hours for yesterday's Reel. 86% non-followers, so it is travelling on Reels distribution rather than your base. Engagement per person reached is the lowest of the five (2.9%) — a punchline gets watched, not replied to. Too young to judge; the number worth checking is tomorrow's.</p>
+    <div class="paidnote">
+      <b>These numbers are not organic.</b> This post is running a 5-day boost — $10.28 spent of a $50 budget so far, optimising for profile visits, audience "Wellness Peeps", Advantage+ placements across Instagram and Facebook.
+      <div class="split">
+        <div>Paid views <span>578</span> of 2,098</div>
+        <div>Paid reach <span>494</span> of 807</div>
+        <div>Paid saves <span>5</span> of 6</div>
+        <div>Paid profile visits <span>36</span> of 43</div>
+        <div>Paid follows <span>5</span> of 13</div>
+        <div>Cost per profile visit <span>$0.29</span></div>
+      </div>
+    </div>
+    <p class="cnote">Strip the ad out and roughly 1,520 organic views, ~313 organic reach and 8 organic follows remain — which is still the best organic follow count of any post in the window, off the smallest reach. Worth knowing before you read the account-level numbers: the +63% jump in profile visits is substantially this campaign. One thing to check on the ad itself — delivery is landing <strong>66.7% in England</strong>, 6.9% Scotland, with New York at 1.6%. If "Wellness Peeps" was meant to find US coaches, Advantage+ has decided otherwise.</p>
+  </div>
+
+  <div class="card hero" style="margin-top:14px">
+    <div class="ctop">
+      <div class="ctitle"><span class="tag">Reel</span><a href="https://www.instagram.com/p/Dca-DBrRn4L/" target="_blank" rel="noopener">"Want to pay less than $40 per reformer Pilates class?"</a></div>
+      <div class="cmeta">Published Aug 24 · <span class="warn">6 minutes old — no data yet</span></div>
+    </div>
+    <div class="cstats">
+      <div class="cstat"><div class="k">Views</div><div class="v">26</div></div>
+      <div class="cstat"><div class="k">Reach</div><div class="v">—</div></div>
+      <div class="cstat"><div class="k">Interactions</div><div class="v">—</div></div>
+      <div class="cstat"><div class="k">Follows</div><div class="v">—</div></div>
+    </div>
+    <p class="cnote">Posted minutes before this refresh, so Instagram has not reported reach or interactions yet. Noting it because of what it is rather than how it did: this is the first post in the window that is <strong>industry commentary rather than lifestyle</strong> — a take on All Day Pilates' 24/7 virtual reformer model. That is the "builder who talks to the industry" positioning, and it is the one piece here that could plausibly interest a coach.</p>
   </div>
 </section>
 
@@ -167,33 +201,33 @@
   <div class="kpis">
     <div class="kpi">
       <div class="label">Views</div>
-      <div class="value">23,200</div>
-      <div class="delta"><span class="up">▲ 137%</span> vs 9,798</div>
+      <div class="value">22,994</div>
+      <div class="delta"><span class="up">▲ 29%</span> vs 17,788</div>
     </div>
     <div class="kpi">
       <div class="label">Accounts reached</div>
-      <div class="value">6,355</div>
+      <div class="value">7,936</div>
       <div class="delta">unique viewers</div>
     </div>
     <div class="kpi">
       <div class="label">Interactions</div>
-      <div class="value">862</div>
-      <div class="delta"><span class="up">▲ 200%</span> vs 287</div>
+      <div class="value">572</div>
+      <div class="delta"><span class="down">▼ 19%</span> vs 704</div>
     </div>
     <div class="kpi">
       <div class="label">Accounts engaged</div>
-      <div class="value">272</div>
-      <div class="delta">4.3% of reach</div>
+      <div class="value">245</div>
+      <div class="delta">3.1% of reach</div>
     </div>
     <div class="kpi">
       <div class="label">Profile visits</div>
-      <div class="value">260</div>
-      <div class="delta"><span class="up">▲ 52%</span> vs 171</div>
+      <div class="value">317</div>
+      <div class="delta"><span class="up">▲ 63%</span> vs 194 · 36 paid</div>
     </div>
     <div class="kpi">
       <div class="label">Followers</div>
-      <div class="value">2,090</div>
-      <div class="delta">unchanged · 3 follows from these posts</div>
+      <div class="value">2,108</div>
+      <div class="delta"><span class="up">▲ 18</span> · 16 follows from these posts</div>
     </div>
   </div>
   </section>
@@ -204,7 +238,7 @@
     <svg class="spark" id="trendChart" role="img" aria-labelledby="trendDesc"></svg>
     <p id="trendDesc" class="cnote" style="margin-top:10px"></p>
     <div class="legend">
-      <span style="color:var(--muted)">Each point is the trailing-7-day total on that date. Instagram exposes no per-day figure, so this is the rolling window sampled once a day — it smooths spikes and shows direction rather than daily peaks. Appears once three daily snapshots exist.</span>
+      <span style="color:var(--muted)">Each point is the trailing-7-day total on that date. Instagram exposes no per-day figure, so this is the rolling window sampled once a day — it smooths spikes and shows direction rather than daily peaks. Points are spaced by date, so a gap means a run did not happen that day — the job only runs when the browser is open. Appears once three daily snapshots exist.</span>
     </div>
   </div>
 </section>
@@ -215,22 +249,22 @@
     <div class="rows">
       <div class="row">
         <div class="name">Reels</div>
-        <div class="track"><div class="seg" style="width:54.0%; background:var(--series-2)"></div></div>
-        <div class="val">54.0%</div>
+        <div class="track"><div class="seg" style="width:66.5%; background:var(--series-2)"></div></div>
+        <div class="val">66.5%</div>
       </div>
       <div class="row">
         <div class="name">Stories</div>
-        <div class="track"><div class="seg" style="width:45.9%; background:var(--series-1)"></div></div>
-        <div class="val">45.9%</div>
+        <div class="track"><div class="seg" style="width:33.3%; background:var(--series-1)"></div></div>
+        <div class="val">33.3%</div>
       </div>
       <div class="row">
         <div class="name">Feed posts</div>
-        <div class="track"><div class="seg" style="width:0.6%; background:var(--series-3)"></div></div>
-        <div class="val">&lt;0.1%</div>
+        <div class="track"><div class="seg" style="width:0.8%; background:var(--series-3)"></div></div>
+        <div class="val">0.2%</div>
       </div>
     </div>
     <div class="legend">
-      <span>Share of 23,200 total views. Reels overtook Stories this week — last week's split was Stories 53% / Reels 47%. Feed posts round to 0.0% because carousels are served almost entirely to existing followers in Home.</span>
+      <span>Share of 22,994 total views. Reels have taken over: 47% of views three weeks ago, 54% last week, 66.5% now. Non-followers are the majority of the account's views for the first time (55.1%).</span>
     </div>
   </div>
   </section>
@@ -240,23 +274,23 @@
   <div class="card">
     <div class="rows">
       <div class="row">
-        <div class="name">Stories</div>
-        <div class="track"><div class="seg" style="width:42.7%; background:var(--series-1)"></div></div>
-        <div class="val">42.7%</div>
-      </div>
-      <div class="row">
         <div class="name">Reels</div>
-        <div class="track"><div class="seg" style="width:31.1%; background:var(--series-2)"></div></div>
-        <div class="val">31.1%</div>
+        <div class="track"><div class="seg" style="width:51.0%; background:var(--series-2)"></div></div>
+        <div class="val">51.0%</div>
       </div>
       <div class="row">
         <div class="name">Feed posts</div>
-        <div class="track"><div class="seg" style="width:26.2%; background:var(--series-3)"></div></div>
-        <div class="val">26.2%</div>
+        <div class="track"><div class="seg" style="width:25.1%; background:var(--series-3)"></div></div>
+        <div class="val">25.1%</div>
+      </div>
+      <div class="row">
+        <div class="name">Stories</div>
+        <div class="track"><div class="seg" style="width:23.9%; background:var(--series-1)"></div></div>
+        <div class="val">23.9%</div>
       </div>
     </div>
     <div class="legend">
-      <span>Share of 862 total interactions. Feed posts pull 26.2% of engagement off effectively 0.0% of views — the inverse of Reels.</span>
+      <span>Share of 572 total interactions — down 19% week on week even as views rose 29%. Stories fell from 43% of interactions to 24%.</span>
     </div>
   </div>
   </section>
@@ -271,45 +305,29 @@
           <div class="seg" style="width:14.7%; background:var(--series-1)"></div>
           <div class="seg" style="width:85.3%; background:var(--series-2)"></div>
         </div>
-        <div class="val">5,240</div>
+        <div class="val">5,453</div>
       </div>
       <div class="row">
         <div class="name">Reel · Netflix doc</div>
         <div class="track">
-          <div class="seg" style="width:13.9%; background:var(--series-1)"></div>
-          <div class="seg" style="width:86.1%; background:var(--series-2)"></div>
+          <div class="seg" style="width:15.2%; background:var(--series-1)"></div>
+          <div class="seg" style="width:84.8%; background:var(--series-2)"></div>
         </div>
-        <div class="val">3,527</div>
+        <div class="val">4,868</div>
       </div>
       <div class="row">
         <div class="name">Reel · 6am workout</div>
         <div class="track">
-          <div class="seg" style="width:17.4%; background:var(--series-1)"></div>
-          <div class="seg" style="width:82.6%; background:var(--series-2)"></div>
+          <div class="seg" style="width:19.6%; background:var(--series-1)"></div>
+          <div class="seg" style="width:80.4%; background:var(--series-2)"></div>
         </div>
-        <div class="val">2,452</div>
-      </div>
-      <div class="row">
-        <div class="name">Carousel · Carrie B.</div>
-        <div class="track">
-          <div class="seg" style="width:94.9%; background:var(--series-1)"></div>
-          <div class="seg" style="width:5.1%; background:var(--series-2)"></div>
-        </div>
-        <div class="val">1,314</div>
-      </div>
-      <div class="row">
-        <div class="name">Carousel · NYC day</div>
-        <div class="track">
-          <div class="seg" style="width:96.0%; background:var(--series-1)"></div>
-          <div class="seg" style="width:4.0%; background:var(--series-2)"></div>
-        </div>
-        <div class="val">1,164</div>
+        <div class="val">2,574</div>
       </div>
     </div>
     <div class="legend">
       <span><i class="dot" style="background:var(--series-1)"></i> Followers</span>
       <span><i class="dot" style="background:var(--series-2)"></i> Non-followers</span>
-      <span style="color:var(--muted)">Number at right is total views for the post since publishing.</span>
+      <span style="color:var(--muted)">Only the three mature Reels are shown — Instagram does not report a follower split for a boosted post, and the Aug 24 Reel is minutes old.</span>
     </div>
   </div>
   </section>
@@ -321,91 +339,91 @@
     <div class="creative">
       <div class="ctop">
         <div class="ctitle"><span class="tag">Reel</span><a href="https://www.instagram.com/p/DcM0MjqBnQ7/" target="_blank" rel="noopener">"I LOVE New York, BUT" — 5 reasons I wouldn't live in Manhattan</a></div>
-        <div class="cmeta">Aug 18 · 3 days old</div>
+        <div class="cmeta">Aug 18 · 6 days old</div>
       </div>
       <div class="cstats">
-        <div class="cstat"><div class="k">Views</div><div class="v">5,240</div></div>
-        <div class="cstat"><div class="k">Reach</div><div class="v">2,658</div></div>
-        <div class="cstat"><div class="k">Interactions</div><div class="v">108</div></div>
-        <div class="cstat"><div class="k">Eng./reach</div><div class="v">4.1%</div></div>
+        <div class="cstat"><div class="k">Views</div><div class="v">5,453</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">2,766</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">109</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">3.9%</div></div>
         <div class="cstat"><div class="k">Comments</div><div class="v">17</div></div>
         <div class="cstat"><div class="k">Shares</div><div class="v">5</div></div>
         <div class="cstat"><div class="k">Saves</div><div class="v">3</div></div>
         <div class="cstat"><div class="k">Follows</div><div class="v">1</div></div>
       </div>
-      <p class="cnote">Still the week's biggest post, and it is still growing three days in — up about 100 views and 2 comments since yesterday. 85% non-followers and 5 shares, the most of anything you published. A numbered opinion with a "fight me" ending is the format doing the work, not the city.</p>
+      <p class="cnote">Six days on and still the highest-reaching post in the window, though it has essentially stopped — 213 views added in three days. 85% non-followers and 5 shares. It reached 2,766 people and produced <strong>one follower</strong>, which is the pattern across every Reel here.</p>
     </div>
 
     <div class="creative">
       <div class="ctop">
         <div class="ctitle"><span class="tag">Reel</span><a href="https://www.instagram.com/p/DcTQMtCxP4W/" target="_blank" rel="noopener">"POV: your two-week trip to America gets renewed for 5 seasons"</a></div>
-        <div class="cmeta">Aug 21 · <span class="warn">3 hours old — still climbing</span> · labelled AI content</div>
+        <div class="cmeta">Aug 21 · 3 days old · labelled AI content</div>
       </div>
       <div class="cstats">
-        <div class="cstat"><div class="k">Views</div><div class="v">3,527</div></div>
-        <div class="cstat"><div class="k">Reach</div><div class="v">2,244</div></div>
-        <div class="cstat"><div class="k">Interactions</div><div class="v">66</div></div>
-        <div class="cstat"><div class="k">Eng./reach</div><div class="v">2.9%</div></div>
+        <div class="cstat"><div class="k">Views</div><div class="v">4,868</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">3,131</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">86</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">2.7%</div></div>
         <div class="cstat"><div class="k">Comments</div><div class="v">6</div></div>
-        <div class="cstat"><div class="k">Shares</div><div class="v">3</div></div>
+        <div class="cstat"><div class="k">Shares</div><div class="v">5</div></div>
         <div class="cstat"><div class="k">Saves</div><div class="v">1</div></div>
         <div class="cstat"><div class="k">Follows</div><div class="v">1</div></div>
       </div>
-      <p class="cnote">Fastest start you have had — 3,527 views in three hours. Distribution is almost entirely cold (86% non-followers). The trade-off shows in the engagement rate: 2.9%, the lowest of the five. Jokes get watched and scrolled past; they do not get replied to. Worth watching whether it holds past 24 hours, which yesterday's Reel did not.</p>
+      <p class="cnote">It did hold past 24 hours, unlike the 6am workout — 3,527 views at three hours became 4,868, and it picked up 2 more shares along the way. <strong>Widest reach of anything you have posted</strong> at 3,131 accounts. Also the weakest engagement rate of the mature posts (2.7%) and one follow. Cheap reach, no relationship.</p>
     </div>
 
     <div class="creative">
       <div class="ctop">
         <div class="ctitle"><span class="tag">Reel</span><a href="https://www.instagram.com/p/DcQpG8bxq-d/" target="_blank" rel="noopener">"America really said: why waste daylight…" — 6am workout</a></div>
-        <div class="cmeta">Aug 20 · 1 day old</div>
+        <div class="cmeta">Aug 20 · 4 days old</div>
       </div>
       <div class="cstats">
-        <div class="cstat"><div class="k">Views</div><div class="v">2,452</div></div>
-        <div class="cstat"><div class="k">Reach</div><div class="v">1,749</div></div>
-        <div class="cstat"><div class="k">Interactions</div><div class="v">64</div></div>
-        <div class="cstat"><div class="k">Eng./reach</div><div class="v">3.7%</div></div>
+        <div class="cstat"><div class="k">Views</div><div class="v">2,574</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">1,803</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">69</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">3.8%</div></div>
         <div class="cstat"><div class="k">Comments</div><div class="v">13</div></div>
         <div class="cstat"><div class="k">Shares</div><div class="v">0</div></div>
         <div class="cstat"><div class="k">Saves</div><div class="v">0</div></div>
         <div class="cstat"><div class="k">Follows</div><div class="v">1</div></div>
       </div>
-      <p class="cnote">Yesterday this looked like the fastest opener of the week at 2,086 views in four hours. It added only <strong>366 views in the next 24</strong>. That is the shape of a Reel that gets one push and no second wave — no shares and no saves to carry it. The 13 comments are real, but they came from the first few hours.</p>
+      <p class="cnote">Confirmed dead. 2,086 views at four hours, 2,452 at one day, 2,574 at four days — it has added 122 views since Friday. Zero shares and zero saves the whole way. This is what a post with no forwarding mechanism looks like once the initial push ends.</p>
     </div>
 
     <div class="creative">
       <div class="ctop">
-        <div class="ctitle"><span class="tag">Carousel</span><a href="https://www.instagram.com/p/DcGWkCakXnY/" target="_blank" rel="noopener">"has anyone seen Carrie Bradshaw?" — NYC outfit</a></div>
-        <div class="cmeta">Aug 16 · 5 days old</div>
+        <div class="ctitle"><span class="tag">Carousel</span><span class="tag paid">Boosted</span><a href="https://www.instagram.com/p/DcYb_aCEe_7/" target="_blank" rel="noopener">"kind of chic to walk 20k steps on vacation"</a></div>
+        <div class="cmeta">Aug 23 · 1 day old · paid campaign live</div>
       </div>
       <div class="cstats">
-        <div class="cstat"><div class="k">Views</div><div class="v">1,314</div></div>
-        <div class="cstat"><div class="k">Reach</div><div class="v">408</div></div>
-        <div class="cstat"><div class="k">Interactions</div><div class="v">89</div></div>
-        <div class="cstat"><div class="k">Eng./reach</div><div class="v">21.8%</div></div>
-        <div class="cstat"><div class="k">Comments</div><div class="v">7</div></div>
-        <div class="cstat"><div class="k">Profile visits</div><div class="v">5</div></div>
-        <div class="cstat"><div class="k">Saves</div><div class="v">0</div></div>
-        <div class="cstat"><div class="k">Follows</div><div class="v">0</div></div>
+        <div class="cstat"><div class="k">Views</div><div class="v">2,098</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">807</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">62</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">7.7%</div></div>
+        <div class="cstat"><div class="k">Comments</div><div class="v">2</div></div>
+        <div class="cstat"><div class="k">Saves</div><div class="v">6</div></div>
+        <div class="cstat"><div class="k">Profile visits</div><div class="v">43</div></div>
+        <div class="cstat"><div class="k">Follows</div><div class="v">13</div></div>
       </div>
-      <p class="cnote">Highest engagement rate of the week by a distance (21.8%) — off 408 people, 95% of them already following you. This is your core audience applauding, not growth. Zero saves, zero follows, five profile visits.</p>
+      <p class="cnote"><strong>13 follows and 43 profile visits</strong> — more than the three Reels combined, off a quarter of their reach. But 5 of those follows, 36 of the profile visits and 5 of the 6 saves came from the boost, so the organic post produced roughly 8 follows and 7 profile visits. Even discounted, it is the most efficient thing in the window. Note the shape: a carousel with a direct question in the caption, reaching a small audience deeply — the opposite of the Reels.</p>
     </div>
 
     <div class="creative">
       <div class="ctop">
-        <div class="ctitle"><span class="tag">Carousel</span><a href="https://www.instagram.com/p/DcI71LOHHS0/" target="_blank" rel="noopener">NYC itinerary — "a perfect day in the city"</a></div>
-        <div class="cmeta">Aug 17 · 4 days old</div>
+        <div class="ctitle"><span class="tag">Reel</span><a href="https://www.instagram.com/p/Dca-DBrRn4L/" target="_blank" rel="noopener">"Want to pay less than $40 per reformer Pilates class?"</a></div>
+        <div class="cmeta">Aug 24 · <span class="warn">6 minutes old — no data yet</span></div>
       </div>
       <div class="cstats">
-        <div class="cstat"><div class="k">Views</div><div class="v">1,164</div></div>
-        <div class="cstat"><div class="k">Reach</div><div class="v">359</div></div>
-        <div class="cstat"><div class="k">Interactions</div><div class="v">65</div></div>
-        <div class="cstat"><div class="k">Eng./reach</div><div class="v">18.1%</div></div>
-        <div class="cstat"><div class="k">Comments</div><div class="v">8</div></div>
-        <div class="cstat"><div class="k">Profile visits</div><div class="v">3</div></div>
-        <div class="cstat"><div class="k">Saves</div><div class="v">0</div></div>
-        <div class="cstat"><div class="k">Follows</div><div class="v">0</div></div>
+        <div class="cstat"><div class="k">Views</div><div class="v">26</div></div>
+        <div class="cstat"><div class="k">Reach</div><div class="v">—</div></div>
+        <div class="cstat"><div class="k">Interactions</div><div class="v">—</div></div>
+        <div class="cstat"><div class="k">Eng./reach</div><div class="v">—</div></div>
+        <div class="cstat"><div class="k">Comments</div><div class="v">0</div></div>
+        <div class="cstat"><div class="k">Shares</div><div class="v">—</div></div>
+        <div class="cstat"><div class="k">Saves</div><div class="v">—</div></div>
+        <div class="cstat"><div class="k">Follows</div><div class="v">—</div></div>
       </div>
-      <p class="cnote">Same shape as the Carrie Bradshaw post — loved by followers, invisible to everyone else (96% followers). The miss worth fixing: an itinerary is the most save-worthy format there is and it earned <strong>zero saves</strong>. The slides are photographs, not a list anyone can come back to.</p>
+      <p class="cnote">Too new to have numbers. Included because it is the first industry-commentary post in this window rather than lifestyle — a read on All Day Pilates&rsquo; 24/7 virtual reformer model. Check it on tomorrow&rsquo;s run.</p>
     </div>
 
   </div>
@@ -422,11 +440,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>NY, but</td><td>Reel</td><td>Aug 18</td><td>5,240</td><td>2,658</td><td>85.3%</td><td>108</td><td>4.1%</td><td>17</td><td>5</td><td>3</td><td>1</td></tr>
-        <tr><td>Netflix doc</td><td>Reel</td><td>Aug 21</td><td>3,527</td><td>2,244</td><td>86.1%</td><td>66</td><td>2.9%</td><td>6</td><td>3</td><td>1</td><td>1</td></tr>
-        <tr><td>6am workout</td><td>Reel</td><td>Aug 20</td><td>2,452</td><td>1,749</td><td>82.6%</td><td>64</td><td>3.7%</td><td>13</td><td>0</td><td>0</td><td>1</td></tr>
-        <tr><td>Carrie Bradshaw</td><td>Carousel</td><td>Aug 16</td><td>1,314</td><td>408</td><td>5.1%</td><td>89</td><td>21.8%</td><td>7</td><td>0</td><td>0</td><td>0</td></tr>
-        <tr><td>NYC day</td><td>Carousel</td><td>Aug 17</td><td>1,164</td><td>359</td><td>4.0%</td><td>65</td><td>18.1%</td><td>8</td><td>1</td><td>0</td><td>0</td></tr>
+        <tr><td>NY, but</td><td>Reel</td><td>Aug 18</td><td>5,453</td><td>2,766</td><td>85.3%</td><td>109</td><td>3.9%</td><td>17</td><td>5</td><td>3</td><td>1</td></tr>
+        <tr><td>Netflix doc</td><td>Reel</td><td>Aug 21</td><td>4,868</td><td>3,131</td><td>84.8%</td><td>86</td><td>2.7%</td><td>6</td><td>5</td><td>1</td><td>1</td></tr>
+        <tr><td>6am workout</td><td>Reel</td><td>Aug 20</td><td>2,574</td><td>1,803</td><td>80.4%</td><td>69</td><td>3.8%</td><td>13</td><td>0</td><td>0</td><td>1</td></tr>
+        <tr><td>kind of chic <b>(boosted)</b></td><td>Carousel</td><td>Aug 23</td><td>2,098</td><td>807</td><td>—</td><td>62</td><td>7.7%</td><td>2</td><td>0</td><td>6</td><td>13</td></tr>
+        <tr><td>Pilates take</td><td>Reel</td><td>Aug 24</td><td>26</td><td>—</td><td>—</td><td>—</td><td>—</td><td>0</td><td>—</td><td>—</td><td>—</td></tr>
       </tbody>
     </table>
   </div>
@@ -435,30 +453,43 @@
 <section class="readout">
   <h2>What the numbers say</h2>
   <div class="card">
-    <p><strong>23,200 views, 6,355 people reached, and the follower count did not move.</strong> It sat at 2,090 yesterday and it sits at 2,090 today. Three follows came from these five posts. Reach more than doubled week over week and interactions tripled, so the distribution is working — but almost none of it is converting into anyone choosing to hear from you again. That gap, not the view count, is the number to fix.</p>
-    <p><strong>Two different machines, and you are running both.</strong> Reels reached 83–86% non-followers; carousels reached 4–5%. Reels are how strangers find you, carousels are how existing followers stay warm. Judging a carousel by views, or a Reel by engagement rate, will make you optimise the wrong thing — the Carrie Bradshaw post has the best engagement rate of the week at 21.8% and produced zero new followers.</p>
-    <p><strong>Yesterday's Reel tells you what a one-push post looks like.</strong> The 6am workout opened at 2,086 views in four hours and added just 366 in the following twenty-four. No shares, no saves, nothing to carry it into a second wave. Compare the "I LOVE New York, BUT" Reel, which had 5 shares and is still climbing on day three. Shares are what buy a post a second life; today's Netflix Reel has 3 of them already, which is the thing to watch as it matures.</p>
-    <p><strong>Saves are still effectively zero.</strong> Four saves across five creatives. Saves are the strongest signal that something is worth returning to, and nothing you published qualified — including an NYC itinerary, the exact format people normally save. Last week the one post that produced real acquisition (the DMV gym roundup: 5 follows, 4 saves) was the one that gave someone something to keep. It has now rolled out of the 7-day window, and with it went most of your follows.</p>
-    <p><strong>Stories remain a large, barely-measured channel.</strong> 46% of views and 43% of interactions came from Stories, not from anything in the grid above.</p>
-    <p><strong>Nothing this week pointed at Wellio.</strong> Five creatives, all lifestyle and travel, one of them AI-generated comedy. As a reach week it worked. As funnel-building for a client-management platform for coaches it did nothing, and the flat follower count means it did not even bank an audience for the lifestyle content. The format that converted last week — a useful, specific, save-worthy roundup — is the same format that would work for coaching content. That is the experiment worth running next.</p>
+    <p><strong>Read the account numbers with the ad in mind.</strong> Profile visits are up 63% and the follower count finally moved (+18 to 2,108) — but a boost has been running on the Aug 23 carousel since Sunday, and it contributed 36 profile visits and 5 follows for $10.28. The underlying organic trend is real but smaller than the headline. Everything below separates the two.</p>
+    <p><strong>Reach went up 29% and interactions went down 19%.</strong> That is the single most important line on this page. Reels now carry 66.5% of views, up from 47% three weeks ago, and for the first time most of the account's views are from non-followers (55.1%). You are reaching many more strangers and fewer of them are doing anything. Accounts engaged fell to 3.1% of reach.</p>
+    <p><strong>Three Reels reached 7,700 people between them and produced three followers.</strong> One each. The boosted carousel reached 807 and produced thirteen — eight of them organic. The Reels are excellent distribution and almost worthless conversion; the carousel is the reverse. Nothing in six weeks of this dashboard has contradicted that split, and it is now stark enough to act on rather than note.</p>
+    <p><strong>The Netflix Reel answered its own question.</strong> It held past 24 hours where the 6am workout did not — 4,868 views and the widest reach the account has had (3,131). The difference was shares: 5 versus 0. Shares buy a post a second wave; the 6am workout had no forwarding mechanism and added 122 views in four days. If a Reel has not picked up shares in its first day, it is finished.</p>
+    <p><strong>Saves are still the missing signal.</strong> Ten saves across the window and five of them were paid. The only organic saves came from the two Reels that were already travelling. Nothing you published was worth keeping.</p>
+    <p><strong>Something changed this morning.</strong> The Pilates post is the first piece in this window aimed at the industry rather than the lifestyle — a take on a studio's 24/7 virtual reformer model, which is exactly the "builder who talks to coaches" position. It is six minutes old, so there is nothing to judge yet. But it is the first content in six weeks of this dashboard that a wellness coach would have a reason to follow you for, and the format that has been converting all along is the carousel with a question in it. Those two facts point at the same experiment: a specific, useful, save-worthy carousel about the coaching business. Everything else here is buying reach you are not banking.</p>
   </div>
   </section>
 
 <footer>
-  Rebuilt daily from Instagram Insights (Professional dashboard → Account + Content) whenever the browser is available;
+  Rebuilt daily from Instagram Insights (Professional dashboard → Account + Content) whenever the browser is available. Paid figures come from the Ad tab of a boosted post and are labelled wherever they appear;
   the stamp at the top says when that last happened, and turns red if a day was missed.
-  Source read on Aug 21, 2026 at 11:25 ET.
+  Source read on Aug 24, 2026 at 07:45 ET.
   Prior-week figures for views, interactions and profile visits are derived by subtracting the 7-day window from the 14-day window;
   reach and accounts-engaged are de-duplicated by Instagram and cannot be differenced this way, so no comparison is shown for them.
-  Per-creative figures are lifetime-to-date for each post, not windowed — the Aug 21 Reel is three hours old and will keep climbing.
+  Per-creative figures are lifetime-to-date for each post, not windowed — the Aug 24 Reel is minutes old and has no reported figures yet.
 </footer>
 
 <script type="application/json" id="ig-history">
 {
   "account": "anastasia.vernidub",
-  "updated": "2026-08-21T11:25:00-04:00",
+  "updated": "2026-08-24T07:45:00-04:00",
   "_note": "days[] = one snapshot per daily run, newest first. Each entry holds the trailing-7-day totals as read that day. weeks[] = the Monday summaries. Both are append-only; never overwrite.",
   "days": [
+    {
+      "date": "2026-08-24",
+      "views": 22994,
+      "viewers": 7936,
+      "interactions": 572,
+      "profileVisits": 317,
+      "followers": 2108,
+      "newCreativeIds": [
+        "3970046176061943803",
+        "3970758908322414091"
+      ],
+      "note": "Aug 22 and Aug 23 runs did not complete (browser unavailable); no snapshot for those dates."
+    },
     {
       "date": "2026-08-21",
       "views": 23200,
@@ -483,6 +514,114 @@
     }
   ],
   "weeks": [
+    {
+      "weekEnding": "2026-08-24",
+      "windowStart": "2026-08-18",
+      "views": 22994,
+      "viewers": 7936,
+      "interactions": 572,
+      "accountsEngaged": 245,
+      "profileVisits": 317,
+      "followers": 2108,
+      "viewMix": {
+        "reels": 66.5,
+        "stories": 33.3,
+        "posts": 0.2
+      },
+      "interactionMix": {
+        "reels": 51.0,
+        "posts": 25.1,
+        "stories": 23.9
+      },
+      "feedFollows": 16,
+      "paidFollows": 5,
+      "creativeCount": 5,
+      "paid": {
+        "mediaId": "3970046176061943803",
+        "spend": 10.28,
+        "budget": 50.0,
+        "goal": "profile visits",
+        "views": 578,
+        "reach": 494,
+        "saves": 5,
+        "profileVisits": 36,
+        "follows": 5,
+        "costPerProfileVisit": 0.29,
+        "audience": "Wellness Peeps",
+        "topGeo": "England 66.7%"
+      },
+      "creatives": [
+        {
+          "id": "3966774933144892475",
+          "shortcode": "DcM0MjqBnQ7",
+          "type": "reel",
+          "date": "2026-08-18",
+          "views": 5453,
+          "reach": 2766,
+          "nonFollowerPct": 85.3,
+          "interactions": 109,
+          "likes": 83,
+          "comments": 17,
+          "saves": 3,
+          "shares": 5,
+          "follows": 1
+        },
+        {
+          "id": "3968586938386284054",
+          "shortcode": "DcTQMtCxP4W",
+          "type": "reel",
+          "date": "2026-08-21",
+          "views": 4868,
+          "reach": 3131,
+          "nonFollowerPct": 84.8,
+          "interactions": 86,
+          "likes": 73,
+          "comments": 6,
+          "saves": 1,
+          "shares": 5,
+          "follows": 1
+        },
+        {
+          "id": "3967852068827738013",
+          "shortcode": "DcQpG8bxq-d",
+          "type": "reel",
+          "date": "2026-08-20",
+          "views": 2574,
+          "reach": 1803,
+          "nonFollowerPct": 80.4,
+          "interactions": 69,
+          "likes": 55,
+          "comments": 13,
+          "saves": 0,
+          "shares": 0,
+          "follows": 1
+        },
+        {
+          "id": "3970046176061943803",
+          "shortcode": "DcYb_aCEe_7",
+          "type": "carousel",
+          "date": "2026-08-23",
+          "boosted": true,
+          "views": 2098,
+          "reach": 807,
+          "interactions": 62,
+          "likes": 54,
+          "comments": 2,
+          "saves": 6,
+          "shares": 0,
+          "profileVisits": 43,
+          "follows": 13
+        },
+        {
+          "id": "3970758908322414091",
+          "shortcode": "Dca-DBrRn4L",
+          "type": "reel",
+          "date": "2026-08-24",
+          "views": 26,
+          "note": "6 minutes old at read time; no reach or interaction data reported yet"
+        }
+      ]
+    },
     {
       "weekEnding": "2026-08-20",
       "windowStart": "2026-08-14",
@@ -648,7 +787,12 @@
   var pad = (hi - lo) * 0.15;
   lo = Math.max(0, lo - pad); hi = hi + pad;
 
-  var x = function (i) { return PL + i * (W - PL - PR) / Math.max(1, days.length - 1); };
+  /* space points by real date, so a missed run leaves a visible gap */
+  var t0 = Date.parse(days[0].date), tN = Date.parse(days[days.length - 1].date);
+  var span = Math.max(1, tN - t0);
+  var x = function (i) {
+    return PL + (Date.parse(days[i].date) - t0) / span * (W - PL - PR);
+  };
   var y = function (v) { return PT + (1 - (v - lo) / (hi - lo)) * (H - PT - PB); };
   var fmt = function (v) { return v >= 1000 ? (v / 1000).toFixed(1) + 'K' : String(v); };
 
